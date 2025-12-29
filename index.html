@@ -76,10 +76,13 @@
         const Menu = ({ className }) => <IconBase className={className}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></IconBase>;
         const X = ({ className }) => <IconBase className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></IconBase>;
         const Dumbbell = ({ className }) => <IconBase className={className}><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></IconBase>;
-        const Printer = ({ className }) => <IconBase className={className}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></IconBase>;
+        const Printer = ({ className }) => <IconBase className={className}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2-2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></IconBase>;
         const Star = ({ className }) => <IconBase className={className}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></IconBase>;
         const Check = ({ className }) => <IconBase className={className}><polyline points="20 6 9 17 4 12"/></IconBase>;
         const ChevronRight = ({ className }) => <IconBase className={className}><path d="m9 18 6-6-6-6"/></IconBase>;
+        const ChevronDown = ({ className }) => <IconBase className={className}><path d="m6 9 6 6 6-6"/></IconBase>;
+        const ChevronUp = ({ className }) => <IconBase className={className}><path d="m18 15-6-6-6 6"/></IconBase>;
+        const AlertCircle = ({ className }) => <IconBase className={className}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconBase>;
         const MapPin = ({ className }) => <IconBase className={className}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></IconBase>;
         const Phone = ({ className }) => <IconBase className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></IconBase>;
         const Clock = ({ className }) => <IconBase className={className}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></IconBase>;
@@ -91,8 +94,49 @@
         // --- Main App Component ---
         const FlexGymWebsite = () => {
             const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [isRulesOpen, setIsRulesOpen] = useState(false);
+            
+            // Form State
+            const [formData, setFormData] = useState({
+                firstName: '',
+                lastName: '',
+                email: '',
+                interest: 'Gym Membership',
+                membershipType: 'Standard Single',
+                addons: 'None',
+                graphicsType: 'Apparel',
+                message: ''
+            });
 
             const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+            // Handle Input Change
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setFormData(prev => ({ ...prev, [name]: value }));
+            };
+
+            // Handle Email Send
+            const handleSendEmail = () => {
+                const { firstName, lastName, email, interest, membershipType, addons, graphicsType, message } = formData;
+                
+                let body = `Name: ${firstName} ${lastName}%0D%0A`;
+                body += `Email: ${email}%0D%0A`;
+                body += `Interest: ${interest}%0D%0A`;
+                
+                if (interest === 'Gym Membership') {
+                    body += `Membership Type: ${membershipType}%0D%0A`;
+                    body += `Add-ons: ${addons}%0D%0A`;
+                } else if (interest === 'Custom Graphics / Apparel') {
+                    body += `Graphics Type: ${graphicsType}%0D%0A`;
+                }
+                
+                body += `Message: ${message}`;
+
+                const subject = `Website Inquiry: ${interest} - ${firstName} ${lastName}`;
+                
+                window.location.href = `mailto:flexgymgfc@gmail.com?subject=${subject}&body=${body}`;
+            };
 
             // Navigation Links
             const navLinks = [
@@ -100,6 +144,7 @@
                 { name: 'About', href: '#about' },
                 { name: 'Services', href: '#services' },
                 { name: 'Membership', href: '#membership' },
+                { name: 'Rules', href: '#rules' },
                 { name: 'Contact', href: '#contact' },
             ];
 
@@ -283,7 +328,7 @@
                         <ul className="space-y-2 text-sm text-gray-500">
                             <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Free Weights</li>
                             <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Cardio Theater</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Personal Training</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Certified Personal Training</li>
                         </ul>
                         </div>
 
@@ -319,7 +364,7 @@
                             Complete your look with our tanning services. We provide a clean, safe environment for all your needs.
                         </p>
                         <ul className="space-y-2 text-sm text-gray-500">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> High-end Beds</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Tanning Beds</li>
                             <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Supplements</li>
                             <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Merchandise</li>
                         </ul>
@@ -334,94 +379,292 @@
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mb-4">Membership Plans</h2>
-                        <p className="text-gray-400">No hidden fees. Just results.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Daily Pass */}
-                        <div className="bg-neutral-900 rounded-2xl p-8 border border-neutral-800 flex flex-col">
-                        <h3 className="text-xl font-bold text-white uppercase tracking-wider">Day Pass</h3>
-                        <div className="mt-4 flex items-baseline">
-                            <span className="text-4xl font-black text-white">$10</span>
-                            <span className="ml-2 text-gray-500">/visit</span>
-                        </div>
-                        <p className="mt-4 text-gray-400 text-sm">Perfect for visitors or trying us out.</p>
-                        <div className="mt-8 flex-1">
-                            <ul className="space-y-4">
-                            <li className="flex items-center text-sm text-gray-300">
-                                <Check className="w-5 h-5 text-orange-500 mr-3" /> Full Gym Access
-                            </li>
-                            <li className="flex items-center text-sm text-gray-300">
-                                <Check className="w-5 h-5 text-orange-500 mr-3" /> Locker Room Access
-                            </li>
-                            </ul>
-                        </div>
-                        <button className="mt-8 w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded uppercase tracking-wider transition-colors">
-                            Walk In
-                        </button>
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mb-4">Membership Plans</h2>
+                            <p className="text-gray-400 mb-6">Flexible options for every lifestyle.</p>
+                            
+                            {/* Waiver Notice */}
+                            <div className="inline-block bg-orange-900/30 border border-orange-500/30 rounded-lg px-6 py-3">
+                                <p className="text-orange-200 text-sm font-medium flex items-center gap-2">
+                                    <span className="bg-orange-500 text-black text-xs font-bold px-2 py-0.5 rounded">REQUIRED</span>
+                                    All members/guests must sign <a href="https://www.jotform.com/app/222365337790157?utm_source=share-qr&utm_medium=website&utm_campaign=portal-app&utm_term=222365337790157" target="_blank" rel="noopener noreferrer" className="text-orange-500 font-bold underline hover:text-orange-400 transition-colors">this waiver</a>.
+                                </p>
+                            </div>
                         </div>
 
-                        {/* Monthly - Highlighted */}
-                        <div className="bg-white rounded-2xl p-8 border-2 border-orange-500 flex flex-col transform md:-translate-y-4 shadow-2xl shadow-orange-500/10">
-                        <div className="absolute top-0 right-0 bg-orange-500 text-black text-xs font-bold px-3 py-1 rounded-bl-lg uppercase">
-                            Most Popular
-                        </div>
-                        <h3 className="text-xl font-bold text-black uppercase tracking-wider">Monthly Single</h3>
-                        <div className="mt-4 flex items-baseline">
-                            <span className="text-5xl font-black text-black">$35</span>
-                            <span className="ml-2 text-gray-600">/month</span>
-                        </div>
-                        <p className="mt-4 text-gray-600 text-sm">Commit to your lifestyle change.</p>
-                        <div className="mt-8 flex-1">
-                            <ul className="space-y-4">
-                            <li className="flex items-center text-sm text-gray-800">
-                                <Check className="w-5 h-5 text-orange-600 mr-3" /> 24/7 Keycard Access
-                            </li>
-                            <li className="flex items-center text-sm text-gray-800">
-                                <Check className="w-5 h-5 text-orange-600 mr-3" /> Free Intro Session
-                            </li>
-                            <li className="flex items-center text-sm text-gray-800">
-                                <Check className="w-5 h-5 text-orange-600 mr-3" /> Tanning Discounts
-                            </li>
-                            </ul>
-                        </div>
-                        <button className="mt-8 w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded uppercase tracking-wider transition-colors shadow-lg">
-                            Join Today
-                        </button>
+                        {/* Premium Add-Ons Grid */}
+                        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-16">
+                            {/* Tanning Add-On (2 columns) */}
+                            <div className="lg:col-span-2 bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 p-6 rounded-2xl flex flex-col justify-between">
+                                <div className="flex items-start justify-between mb-4">
+                                    <div className="p-3 bg-orange-500/10 rounded-lg text-orange-500">
+                                        <Star className="w-8 h-8" />
+                                    </div>
+                                    <div className="text-right">
+                                        <span className="block text-3xl font-black text-white">+$20</span>
+                                        <span className="text-gray-500 text-sm">/month</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-white uppercase tracking-wider mb-2">Tanning Add-On</h3>
+                                    <p className="text-gray-400 text-sm">
+                                        Available for any <span className="text-orange-500 font-bold">individual</span> membership. 
+                                        Quality beds for that perfect glow.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Personal Training (3 columns) */}
+                            <div className="lg:col-span-3 bg-white/5 border border-orange-500/30 p-6 rounded-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-4 opacity-5">
+                                    <Dumbbell className="w-48 h-48" />
+                                </div>
+                                <div className="relative z-10">
+                                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                                                Certified Personal Training
+                                                <span className="text-xs bg-orange-500 text-black px-2 py-1 rounded font-bold">CPT</span>
+                                            </h3>
+                                            <p className="text-orange-500 text-sm font-medium mt-1">Individual Memberships Only</p>
+                                        </div>
+                                        <div className="flex gap-4 text-right">
+                                            <div>
+                                                <span className="block text-2xl font-black text-white">$20</span>
+                                                <span className="text-gray-400 text-xs uppercase">Per Session</span>
+                                            </div>
+                                            <div className="w-px bg-neutral-700"></div>
+                                            <div>
+                                                <span className="block text-2xl font-black text-white">$250</span>
+                                                <span className="text-gray-400 text-xs uppercase">Per Month</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                                        Session includes 1 full hour of training, focusing on technique, form, and physical ability. 
+                                        Our goal is to help you recognize and break mental blocks that have been holding you back.
+                                    </p>
+                                    <div className="flex flex-wrap gap-3">
+                                        <span className="px-3 py-1 bg-black/50 rounded-full text-xs text-gray-400 border border-neutral-700">Injury Prevention Focus</span>
+                                        <span className="px-3 py-1 bg-black/50 rounded-full text-xs text-gray-400 border border-neutral-700">Form Correction</span>
+                                        <span className="px-3 py-1 bg-black/50 rounded-full text-xs text-gray-400 border border-neutral-700">Goal Setting</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Family Plan */}
-                        <div className="bg-neutral-900 rounded-2xl p-8 border border-neutral-800 flex flex-col">
-                        <h3 className="text-xl font-bold text-white uppercase tracking-wider">Couple / Family</h3>
-                        <div className="mt-4 flex items-baseline">
-                            <span className="text-4xl font-black text-white">$60</span>
-                            <span className="ml-2 text-gray-500">/month</span>
+                        {/* Short Term Passes */}
+                        <div className="mb-12">
+                            <h3 className="text-xl font-bold text-white uppercase tracking-widest mb-6 border-l-4 border-orange-500 pl-4">Short Term Access</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {/* Day Pass */}
+                                <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 hover:border-orange-500/50 transition-colors">
+                                    <h4 className="font-bold text-gray-300 uppercase tracking-wider">Day Pass</h4>
+                                    <div className="mt-2 flex items-baseline">
+                                        <span className="text-3xl font-black text-white">$7</span>
+                                        <span className="ml-1 text-gray-500 text-sm">/visit</span>
+                                    </div>
+                                    <p className="mt-2 text-xs text-gray-500">During office hours only.</p>
+                                </div>
+
+                                {/* Week Pass */}
+                                <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 hover:border-orange-500/50 transition-colors">
+                                    <h4 className="font-bold text-gray-300 uppercase tracking-wider">Week Pass</h4>
+                                    <div className="mt-2 flex items-baseline">
+                                        <span className="text-3xl font-black text-white">$20</span>
+                                        <span className="ml-1 text-gray-500 text-sm">/week</span>
+                                    </div>
+                                    <p className="mt-2 text-xs text-gray-500">7 consecutive days.</p>
+                                </div>
+                            </div>
                         </div>
-                        <p className="mt-4 text-gray-400 text-sm">Get fit together and save.</p>
-                        <div className="mt-8 flex-1">
-                            <ul className="space-y-4">
-                            <li className="flex items-center text-sm text-gray-300">
-                                <Check className="w-5 h-5 text-orange-500 mr-3" /> 2 Adults Included
-                            </li>
-                            <li className="flex items-center text-sm text-gray-300">
-                                <Check className="w-5 h-5 text-orange-500 mr-3" /> 24/7 Access for Both
-                            </li>
-                            <li className="flex items-center text-sm text-gray-300">
-                                <Check className="w-5 h-5 text-orange-500 mr-3" /> Add kids (Age 14+) +$10
-                            </li>
-                            </ul>
+
+                        {/* Monthly Plans Grid */}
+                        <h3 className="text-xl font-bold text-white uppercase tracking-widest mb-6 border-l-4 border-orange-500 pl-4">Monthly Memberships</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                            
+                            {/* Student */}
+                            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 flex flex-col">
+                                <div className="flex justify-between items-start">
+                                    <h3 className="text-xl font-bold text-white uppercase tracking-wider">Student</h3>
+                                </div>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-white">$30</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-400">Valid student ID required.</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> 24/7 Access</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Tanning Add-on Available (+$20)</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Personal Training Available</li>
+                                </ul>
+                            </div>
+
+                            {/* Police / Military */}
+                            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 flex flex-col">
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider">Police / Military</h3>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-white">$35</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-400">Thank you for your service.</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> 24/7 Access</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> ID Required</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Tanning Add-on Available (+$20)</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Personal Training Available</li>
+                                </ul>
+                            </div>
+
+                            {/* Local Workforce */}
+                            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 flex flex-col">
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider">Local Workforce</h3>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-white">$35</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-400">See front desk for applicability.</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> 24/7 Access</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Tanning Add-on Available (+$20)</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Personal Training Available</li>
+                                </ul>
+                            </div>
+
+                            {/* Single Standard */}
+                            <div className="bg-white rounded-2xl p-6 border-2 border-orange-500 flex flex-col shadow-2xl shadow-orange-500/10 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 bg-orange-500 text-black text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">
+                                    Standard
+                                </div>
+                                <h3 className="text-xl font-bold text-black uppercase tracking-wider">Single</h3>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-black">$42</span>
+                                    <span className="ml-1 text-gray-600 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-600">Full access membership.</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-800"><Check className="w-4 h-4 text-orange-600 mr-2" /> 24/7 Keycard Access</li>
+                                    <li className="flex items-center text-sm text-gray-800"><Check className="w-4 h-4 text-orange-600 mr-2" /> Tanning Add-on Available (+$20)</li>
+                                    <li className="flex items-center text-sm text-gray-800"><Check className="w-4 h-4 text-orange-600 mr-2" /> Personal Training Available</li>
+                                </ul>
+                                <button className="mt-6 w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded uppercase tracking-wider transition-colors shadow-lg text-sm">
+                                    Join Today
+                                </button>
+                            </div>
+                            
+                            {/* Bring a Friend (New) */}
+                            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 flex flex-col">
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider">Bring a Friend</h3>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-white">$50</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-400">Workout with your buddy.</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Owner + Any 1 Guest</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Guest accompanies Owner</li>
+                                    <li className="flex items-center text-sm text-gray-500"><X className="w-4 h-4 text-neutral-500 mr-2" /> Tanning not applicable</li>
+                                </ul>
+                            </div>
+
+                            {/* Partner Plan */}
+                            <div className="bg-neutral-800 rounded-2xl p-6 border border-neutral-700 flex flex-col relative overflow-hidden">
+                                <div className="absolute top-0 right-0 bg-neutral-700 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">
+                                    Best Value
+                                </div>
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider">Partner Plan</h3>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-white">$55</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-orange-500 font-medium">For 2 Individuals (Any Relation)</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Both parties liable</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> 24/7 Access for Both</li>
+                                    <li className="flex items-center text-sm text-gray-500"><X className="w-4 h-4 text-neutral-500 mr-2" /> Tanning not applicable</li>
+                                </ul>
+                            </div>
+
+                            {/* Family Plan */}
+                            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 flex flex-col">
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider">Family Plan</h3>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-white">$74</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-400">Up to 4 family members.</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Huge Savings</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> 24/7 Access for All</li>
+                                    <li className="flex items-center text-sm text-gray-500"><X className="w-4 h-4 text-neutral-500 mr-2" /> Tanning not applicable</li>
+                                </ul>
+                            </div>
+
+                             {/* Tanning Only */}
+                             <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 flex flex-col">
+                                <h3 className="text-xl font-bold text-orange-500 uppercase tracking-wider">Tanning Only</h3>
+                                <div className="mt-4 flex items-baseline">
+                                    <span className="text-4xl font-black text-white">$50</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
+                                </div>
+                                <p className="mt-2 text-sm text-gray-400">Gym access not included.</p>
+                                <ul className="mt-6 space-y-3 flex-1">
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Unlimited Tanning</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Quality Beds</li>
+                                </ul>
+                            </div>
+
                         </div>
-                        <button className="mt-8 w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded uppercase tracking-wider transition-colors">
-                            Inquire Now
+                        
+                        <div className="mt-12 text-center">
+                            <p className="text-sm text-gray-500 italic">* Prices subject to change. See front desk for details.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* --- Rules Section --- */}
+                <div id="rules" className="py-12 bg-neutral-900 border-t border-neutral-800">
+                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <button 
+                            onClick={() => setIsRulesOpen(!isRulesOpen)}
+                            className="w-full flex items-center justify-between p-6 bg-neutral-800 rounded-xl hover:bg-neutral-700 transition-all group"
+                        >
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 bg-orange-500 rounded-lg text-black group-hover:bg-white transition-colors">
+                                    <AlertCircle className="w-6 h-6" />
+                                </div>
+                                <div className="text-left">
+                                    <h3 className="text-xl font-bold text-white uppercase tracking-wider">Gym Rules & Policies</h3>
+                                    <p className="text-sm text-gray-400">Click to view our code of conduct.</p>
+                                </div>
+                            </div>
+                            {isRulesOpen ? <ChevronUp className="w-6 h-6 text-orange-500" /> : <ChevronDown className="w-6 h-6 text-gray-400" />}
                         </button>
+
+                        <div className={`mt-4 overflow-hidden transition-all duration-500 ease-in-out ${isRulesOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                            <div className="bg-neutral-950 p-8 rounded-xl border border-neutral-800">
+                                <ol className="space-y-4 text-gray-300 list-decimal list-inside marker:text-orange-500 marker:font-bold">
+                                    <li className="pl-2">Headphones or earbuds must be used when streaming audio from any device.</li>
+                                    <li className="pl-2">Do not open the gym door for or otherwise allow entry for any individual unless you have permission by the gym owner or they are on your account. Your key fob is for your use only. Breaking this rule will result in immediate deactivation of your account.</li>
+                                    <li className="pl-2">No profanity.</li>
+                                    <li className="pl-2">Rack your weights, clean up after yourself (Sanitizing products are available to wipe down equipment).</li>
+                                    <li className="pl-2">No outside food is allowed in the building. Drinks must be kept in a spill proof container.</li>
+                                    <li className="pl-2">Children must be supervised by an adult at all times.</li>
+                                    <li className="pl-2">Do not slam or otherwise damage weights, equipment, or gym property.</li>
+                                    <li className="pl-2">Absolutely no recording of any individual without their consent.</li>
+                                    <li className="pl-2">No pets other than service animals inside the gym.</li>
+                                    <li className="pl-2">
+                                        No children under the age of 12 are permitted inside the gym between the hours of 7:00 PM and 7:00 AM. Exceptions to this rule are as follows:
+                                        <ul className="list-disc list-inside mt-2 space-y-2 pl-4 text-gray-400 text-sm">
+                                            <li>A legal guardian or parent has added the child to their membership (+$20 per child) and is present with said child. This permission will be revoked if the child causes disturbances to other members or damage to gym property.</li>
+                                            <li>Access has been explicitly granted by the gym owner.</li>
+                                        </ul>
+                                    </li>
+                                    <li className="pl-2">Proper athletic attire (shirt, pants/shorts, shoes) must be worn at all times while in the gym.</li>
+                                </ol>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div className="mt-12 text-center">
-                        <p className="text-sm text-gray-500 italic">* Prices subject to change. See front desk for details.</p>
-                    </div>
                     </div>
                 </div>
 
@@ -448,7 +691,7 @@
                             <MapPin className="w-6 h-6 text-orange-500 mt-1" />
                             <div>
                                 <h4 className="text-white font-bold">Location</h4>
-                                <p className="text-gray-400">123 Main Street <br />Your City, State 12345</p>
+                                <p className="text-gray-400">25 South Park Shopping Center <br />Nashville, Arkansas 71852</p>
                             </div>
                             </div>
 
@@ -456,7 +699,7 @@
                             <Phone className="w-6 h-6 text-orange-500 mt-1" />
                             <div>
                                 <h4 className="text-white font-bold">Phone</h4>
-                                <p className="text-gray-400">(555) 123-4567</p>
+                                <p className="text-gray-400">870-557-2466</p>
                             </div>
                             </div>
 
@@ -469,8 +712,9 @@
                                 </p>
                                 <p className="text-gray-400 mt-1">
                                 <span className="block text-white">Staffed Hours:</span>
-                                Mon-Fri: 9am - 7pm <br />
-                                Sat: 10am - 4pm
+                                Mon-Thu: 9am - 5pm <br />
+                                Fri: 9am - 12pm <br />
+                                Sat-Sun: Closed
                                 </p>
                             </div>
                             </div>
@@ -484,31 +728,125 @@
                             <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-xs font-bold text-gray-500 uppercase mb-1">First Name</label>
-                                <input type="text" className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="John" />
+                                <input 
+                                    type="text" 
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleInputChange}
+                                    className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" 
+                                    placeholder="John" 
+                                />
                             </div>
                             <div>
                                 <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Last Name</label>
-                                <input type="text" className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="Doe" />
+                                <input 
+                                    type="text" 
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleInputChange}
+                                    className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" 
+                                    placeholder="Doe" 
+                                />
                             </div>
                             </div>
                             <div>
                             <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
-                            <input type="email" className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="john@example.com" />
+                            <input 
+                                type="email" 
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" 
+                                placeholder="john@example.com" 
+                            />
                             </div>
                             <div>
                             <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Interest</label>
-                            <select className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors">
+                            <select 
+                                name="interest"
+                                value={formData.interest}
+                                onChange={handleInputChange}
+                                className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors"
+                            >
                                 <option>Gym Membership</option>
                                 <option>Custom Graphics / Apparel</option>
                                 <option>Personal Training</option>
                                 <option>Other</option>
                             </select>
                             </div>
+
+                            {/* Conditional Fields based on Interest */}
+                            {formData.interest === 'Gym Membership' && (
+                                <div className="animate-fade-in-up space-y-4">
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Membership Type</label>
+                                        <select 
+                                            name="membershipType"
+                                            value={formData.membershipType}
+                                            onChange={handleInputChange}
+                                            className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors"
+                                        >
+                                            <option>Standard Single ($42)</option>
+                                            <option>Student ($30)</option>
+                                            <option>Police / Military / Workforce ($35)</option>
+                                            <option>Partner Plan ($55)</option>
+                                            <option>Bring a Friend ($50)</option>
+                                            <option>Family Plan ($74)</option>
+                                            <option>Tanning Only ($50)</option>
+                                            <option>Day/Week Pass</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Add-ons</label>
+                                        <select 
+                                            name="addons"
+                                            value={formData.addons}
+                                            onChange={handleInputChange}
+                                            className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors"
+                                        >
+                                            <option>None</option>
+                                            <option>Tanning (+$20)</option>
+                                            <option>Personal Training (+$20/session)</option>
+                                            <option>Both</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            )}
+
+                            {formData.interest === 'Custom Graphics / Apparel' && (
+                                <div className="animate-fade-in-up">
+                                    <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Graphics Type</label>
+                                    <select 
+                                        name="graphicsType"
+                                        value={formData.graphicsType}
+                                        onChange={handleInputChange}
+                                        className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors"
+                                    >
+                                        <option>Apparel / Shirts</option>
+                                        <option>Decals / Stickers</option>
+                                        <option>Banners / Signage</option>
+                                        <option>Vehicle Branding</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            )}
+
                             <div>
                             <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Message</label>
-                            <textarea rows="4" className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" placeholder="How can we help you?"></textarea>
+                            <textarea 
+                                name="message"
+                                value={formData.message}
+                                onChange={handleInputChange}
+                                rows="4" 
+                                className="w-full bg-black border border-neutral-800 rounded p-3 text-white focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-colors" 
+                                placeholder="How can we help you?"
+                            ></textarea>
                             </div>
-                            <button type="button" className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded uppercase tracking-wider transition-colors">
+                            <button 
+                                type="button" 
+                                onClick={handleSendEmail}
+                                className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded uppercase tracking-wider transition-colors"
+                            >
                             Send Message
                             </button>
                         </form>
