@@ -89,6 +89,7 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
         }
         
         .glass-panel-hover:hover {
@@ -347,14 +348,17 @@
                 {/* --- Hero Section --- */}
                 <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-0">
                     <div className="absolute inset-0 z-0">
-                        <img 
-                            src="background%201.png" 
-                            alt="Gym Background" 
-                            className="w-full h-full object-cover object-center opacity-70 md:opacity-80"
-                            onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"; }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-black/40" />
-                        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+                        {/* Improved Mobile Bg: Sticky/Fixed-like behavior */}
+                        <div className="sticky top-0 h-screen w-full overflow-hidden">
+                            <img 
+                                src="background%201.png" 
+                                alt="Gym Background" 
+                                className="w-full h-full object-cover object-center opacity-70 md:opacity-80"
+                                onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"; }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-black/40" />
+                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+                        </div>
                     </div>
 
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
@@ -399,14 +403,17 @@
                 {/* --- About Section --- */}
                 <div id="about" className="py-24 md:py-32 bg-dark-900 relative overflow-hidden">
                     <div className="absolute inset-0 z-0">
-                         <img 
-                            src="background%202.png" 
-                            alt="Gym Interior" 
-                            className="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity"
-                            loading="lazy"
-                            onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop"; }}
-                        />
-                         <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-transparent to-dark-900"></div>
+                         {/* Improved Mobile Bg: Sticky/Fixed-like behavior */}
+                         <div className="sticky top-0 h-screen w-full overflow-hidden">
+                            <img 
+                                src="background%202.png" 
+                                alt="Gym Interior" 
+                                className="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity"
+                                loading="lazy"
+                                onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop"; }}
+                            />
+                             <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-transparent to-dark-900"></div>
+                        </div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -466,15 +473,17 @@
                 {/* --- Classes Section --- */}
                 <div id="classes" className="py-24 bg-dark-800 relative">
                      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-                        {/* Added Background 3 for Classes */}
-                        <img 
-                            src="background%203.png" 
-                            alt="Classes Background" 
-                            className="w-full h-full object-cover object-center"
-                            onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                         {/* Consistent 88% Opacity Overlay */}
-                         <div className="absolute inset-0 bg-dark-900/[0.88]"></div>
+                        {/* Improved Mobile Bg: Sticky/Fixed-like behavior */}
+                        <div className="sticky top-0 h-screen w-full overflow-hidden">
+                            <img 
+                                src="background%203.png" 
+                                alt="Classes Background" 
+                                className="w-full h-full object-cover object-center"
+                                onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                             {/* Consistent 88% Opacity Overlay */}
+                             <div className="absolute inset-0 bg-dark-900/[0.88]"></div>
+                        </div>
                      </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -602,15 +611,18 @@
                 <div id="membership" className="py-24 bg-dark-900 relative">
                     {/* Background Image fixed-like behavior but safer */}
                     <div className="absolute inset-0 z-0">
-                         <img 
-                            src="background%204.png" 
-                            alt="Gym Weights" 
-                            className="w-full h-full object-cover object-center"
-                            loading="lazy"
-                            onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                         {/* Adjusted overlay to exactly 88% Opacity (0.88) */}
-                         <div className="absolute inset-0 bg-dark-900/[0.88]"></div>
+                        {/* Improved Mobile Bg: Sticky/Fixed-like behavior */}
+                        <div className="sticky top-0 h-screen w-full overflow-hidden">
+                            <img 
+                                src="background%204.png" 
+                                alt="Gym Weights" 
+                                className="w-full h-full object-cover object-center"
+                                loading="lazy"
+                                onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                             {/* Adjusted overlay to exactly 88% Opacity (0.88) */}
+                             <div className="absolute inset-0 bg-dark-900/[0.88]"></div>
+                        </div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -701,9 +713,8 @@
                                 { title: "Family Plan", price: "$74", period: "/month", desc: "Up to 4 family members.", features: ["Huge Savings", "24/7 Access for All", "Tanning not applicable"] },
                             ].map((plan, i) => (
                                 <div key={i} className={`
-                                    relative p-8 rounded-2xl border transition-all duration-300 flex flex-col
-                                    ${plan.highlight ? 'bg-dark-800 border-orange-500/50 shadow-2xl shadow-orange-500/10 scale-[1.02] z-10' : 'bg-dark-800/50 border-white/5 hover:border-white/20 hover:bg-dark-800'}
-                                    ${plan.shortTerm ? 'lg:col-span-1 md:col-span-1 bg-dark-900' : ''}
+                                    relative p-8 rounded-2xl border transition-all duration-300 flex flex-col glass-panel hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/10
+                                    ${plan.shortTerm ? 'lg:col-span-1 md:col-span-1' : ''}
                                 `}>
                                     {plan.bestValue && (
                                         <div className="absolute top-0 right-0 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg uppercase tracking-wider">
@@ -797,14 +808,17 @@
                 {/* --- Footer & Contact --- */}
                 <footer id="contact" className="bg-black pt-24 pb-12 relative overflow-hidden">
                     <div className="absolute inset-0 z-0">
-                         <img 
-                            src="background%205.png" 
-                            alt="Contact" 
-                            className="w-full h-full object-cover object-center opacity-30"
-                            loading="lazy"
-                            onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent"></div>
+                         {/* Improved Mobile Bg: Sticky/Fixed-like behavior */}
+                         <div className="sticky top-0 h-screen w-full overflow-hidden">
+                            <img 
+                                src="background%205.png" 
+                                alt="Contact" 
+                                className="w-full h-full object-cover object-center opacity-30"
+                                loading="lazy"
+                                onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent"></div>
+                        </div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
