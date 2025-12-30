@@ -278,32 +278,37 @@
                     </div>
 
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-orange-500 font-bold tracking-widest uppercase text-sm md:text-base mb-4 animate-fade-in-up">
-                        Welcome to Flex Gym Graphics & Fitness Center
-                    </h2>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 uppercase tracking-tight italic">
-                        Transform <br className="hidden md:block" />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-                        Your Lifestyle
-                        </span>
-                    </h1>
-                    <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300 mb-10">
-                        We are more than just a gym. We are a company built on family, community, and small town values. Our mission is to help you become a stronger, healthier, more energetic, and confident you.
-                    </p>
-                    <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        {/* UPDATED: Join Now button links to external portal */}
-                        <a 
-                            href="https://flexgymnashville.gymmasteronline.com/portal/login" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded text-lg transition-all transform hover:scale-105 uppercase tracking-wider flex items-center justify-center gap-2"
-                        >
-                            Join Now <ChevronRight className="w-5 h-5" />
-                        </a>
-                        <a href="#services" className="px-8 py-4 bg-transparent border-2 border-white hover:border-orange-500 hover:text-orange-500 text-white font-bold rounded text-lg transition-all uppercase tracking-wider">
-                        Explore Services
-                        </a>
-                    </div>
+                        
+                        {/* UPDATED: Added a backdrop-blur container for text readability against busy background */}
+                        <div className="bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl max-w-5xl mx-auto">
+                            <h2 className="text-orange-500 font-bold tracking-widest uppercase text-sm md:text-base mb-4 animate-fade-in-up">
+                                Welcome to Flex Gym Graphics & Fitness Center
+                            </h2>
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 uppercase tracking-tight italic">
+                                Transform <br className="hidden md:block" />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
+                                Your Lifestyle
+                                </span>
+                            </h1>
+                            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-200 mb-10 font-medium">
+                                We are more than just a gym. We are a company built on family, community, and small town values. Our mission is to help you become a stronger, healthier, more energetic, and confident you.
+                            </p>
+                            <div className="flex flex-col sm:flex-row justify-center gap-4">
+                                {/* UPDATED: Join Now button links to external portal */}
+                                <a 
+                                    href="https://flexgymnashville.gymmasteronline.com/portal/login" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded text-lg transition-all transform hover:scale-105 uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
+                                >
+                                    Join Now <ChevronRight className="w-5 h-5" />
+                                </a>
+                                <a href="#services" className="px-8 py-4 bg-transparent border-2 border-white hover:border-orange-500 hover:text-orange-500 text-white font-bold rounded text-lg transition-all uppercase tracking-wider hover:bg-black/30">
+                                Explore Services
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -381,7 +386,7 @@
                     {/* UPDATED: Top Gradient Transition (from bg-neutral-950 of previous section) */}
                     <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-950 to-transparent z-10 pointer-events-none"></div>
                     
-                    {/* UPDATED: Bottom Gradient Transition (to bg-neutral-950 of next section) */}
+                    {/* UPDATED: Bottom Gradient Transition (to bg-neutral-900 of next section) */}
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-950 to-transparent z-10 pointer-events-none"></div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
