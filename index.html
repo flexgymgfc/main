@@ -111,18 +111,35 @@
                 email: '',
                 phone: '',
                 interest: 'Gym Membership',
-                membershipType: 'Standard Single',
+                membershipType: 'Standard Single ($42)', // Set explicit default matching option
                 addons: 'None',
                 graphicsType: 'Apparel',
                 message: ''
             });
 
+            // UPDATED: Defined list of memberships that support add-ons
+            const individualMemberships = [
+                'Standard Single ($42)',
+                'Student ($30)', 
+                'Police / Military / Workforce ($35)'
+            ];
+
             const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-            // Handle Input Change
+            // UPDATED: Smart Input Change Handler
             const handleInputChange = (e) => {
                 const { name, value } = e.target;
-                setFormData(prev => ({ ...prev, [name]: value }));
+                setFormData(prev => {
+                    const newData = { ...prev, [name]: value };
+                    
+                    // Logic: If user changes Membership Type to one that doesn't support addons, reset addons to 'None'
+                    if (name === 'membershipType') {
+                        if (!individualMemberships.includes(value)) {
+                            newData.addons = 'None';
+                        }
+                    }
+                    return newData;
+                });
             };
 
             // Handle Form Submit (API Call)
@@ -154,7 +171,7 @@
                             email: '',
                             phone: '',
                             interest: 'Gym Membership',
-                            membershipType: 'Standard Single',
+                            membershipType: 'Standard Single ($42)',
                             addons: 'None',
                             graphicsType: 'Apparel',
                             message: ''
@@ -405,7 +422,8 @@
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* UPDATED: Grid to support 3 cards on lg screens */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {/* Hip Hop Step Card */}
                             <div className="bg-neutral-900/80 backdrop-blur-sm rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -460,6 +478,35 @@
                                     </div>
                                     <div className="flex items-center gap-2 text-sm text-gray-400">
                                         <Check className="w-4 h-4 text-orange-500" /> Social & Supportive Environment
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 80s Disco Card (New) */}
+                            <div className="bg-neutral-900/80 backdrop-blur-sm rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                    <Star className="w-24 h-24 text-orange-500" />
+                                </div>
+                                
+                                <h3 className="text-2xl font-bold text-white uppercase tracking-wider mb-2">80s Disco Cardio</h3>
+                                <div className="flex items-center gap-2 text-orange-500 mb-6 font-bold">
+                                    <Clock className="w-5 h-5" />
+                                    <span>Coming Soon</span>
+                                </div>
+                                
+                                <p className="text-gray-300 mb-6 leading-relaxed">
+                                    Step back in time with our 80’s Disco Cardio & Strength class! This class fuses classic exercises like leg lifts, scissor kicks, squats, and lunges with light strength training for a workout ranging from low to high intensity.
+                                </p>
+                                
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Clean, upbeat 80s playlist
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Retro attire encouraged!
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Fun, nostalgic atmosphere
                                     </div>
                                 </div>
                             </div>
@@ -556,7 +603,7 @@
                     </div>
                     
                     {/* UPDATED: Top Gradient Transition (from bg-neutral-900 of previous section) */}
-                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-950 to-transparent z-10 pointer-events-none"></div>
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-900 to-transparent z-10 pointer-events-none"></div>
 
                     {/* UPDATED: Bottom Gradient Transition (to bg-neutral-900 of next section) */}
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-900 to-transparent z-10 pointer-events-none"></div>
@@ -1029,7 +1076,10 @@
                                             <option>Day/Week Pass</option>
                                         </select>
                                     </div>
-                                    <div>
+                                    
+                                    {/* UPDATED: Only show Add-ons if the membership type supports it */}
+                                    {individualMemberships.includes(formData.membershipType) && (
+                                    <div className="animate-fade-in-up">
                                         <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Add-ons</label>
                                         <select 
                                             name="addons"
@@ -1043,6 +1093,7 @@
                                             <option value="Tanning & Personal Training">Both (Tanning & Personal Training)</option>
                                         </select>
                                     </div>
+                                    )}
                                 </div>
                             )}
 
