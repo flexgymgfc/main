@@ -92,6 +92,7 @@
         const Mail = ({ className }) => <IconBase className={className}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></IconBase>;
         const Facebook = ({ className }) => <IconBase className={className}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></IconBase>;
         const Instagram = ({ className }) => <IconBase className={className}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></IconBase>;
+        const Music = ({ className }) => <IconBase className={className}><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></IconBase>;
 
 
         // --- Main App Component ---
@@ -177,6 +178,7 @@
                 { name: 'Home', href: '#home' },
                 { name: 'About', href: '#about' },
                 { name: 'Services', href: '#services' },
+                { name: 'Classes', href: '#classes' },
                 { name: 'Membership', href: '#membership' },
                 { name: 'Rules', href: '#rules' },
                 { name: 'Contact', href: '#contact' },
@@ -449,6 +451,79 @@
                         </ul>
                         </div>
                     </div>
+                    </div>
+                </div>
+
+                {/* --- Classes Section --- */}
+                <div id="classes" className="py-24 bg-neutral-950 relative border-t border-neutral-900">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mb-4">Group Classes</h2>
+                            <div className="h-1 w-20 bg-orange-500 mx-auto"></div>
+                            <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+                                Join our supportive community classes designed for all fitness levels.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {/* Hip Hop Step Card */}
+                            <div className="bg-neutral-900 rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                    <Music className="w-24 h-24 text-orange-500" />
+                                </div>
+                                
+                                <h3 className="text-2xl font-bold text-white uppercase tracking-wider mb-2">Hip Hop Step</h3>
+                                <div className="flex items-center gap-2 text-orange-500 mb-6 font-bold">
+                                    <Clock className="w-5 h-5" />
+                                    <span>Mon & Wed | 4:30 PM - 5:30 PM</span>
+                                </div>
+                                
+                                <p className="text-gray-300 mb-6 leading-relaxed">
+                                    A high-energy fitness class that combines step aerobics and hip hop/pop music for a fun, all body cardio experience. Hip Hop Step turns your boring cardio into a fun, entertaining, mood boosting experience.
+                                </p>
+                                
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> All ages and fitness levels
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Beginner to Advanced
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Modifications available
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* FVC Card */}
+                            <div className="bg-neutral-900 rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
+                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                    <Dumbbell className="w-24 h-24 text-orange-500" />
+                                </div>
+
+                                <h3 className="text-2xl font-bold text-white uppercase tracking-wider mb-2">FVC (Flex Vintage Crew)</h3>
+                                <div className="flex items-center gap-2 text-orange-500 mb-6 font-bold">
+                                    <Clock className="w-5 h-5" />
+                                    <span>Mon, Wed, Fri | 9:00 AM</span>
+                                </div>
+                                
+                                <p className="text-gray-300 mb-6 leading-relaxed">
+                                    Designed for anyone wanting to put their health first. Whether you want to clear mental fog, learn proper technique, or just include social activity into your weekly routine.
+                                </p>
+                                
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Gain stamina & increase mobility
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Learn proper form & technique
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                        <Check className="w-4 h-4 text-orange-500" /> Social & Supportive Environment
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
