@@ -283,11 +283,11 @@
                 <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-0">
                     {/* Background Image 1 (Hero) with Overlay */}
                     <div className="absolute inset-0 z-0">
-                    {/* UPDATED: Uses background 1.png with fetchpriority="high" for faster loading */}
+                    {/* UPDATED: Uses background 1.png with fetchpriority="high" for faster loading. Added object-center. */}
                     <img 
                         src="background%201.png" 
                         alt="Gym Background" 
-                        className="w-full h-full object-cover opacity-90"
+                        className="w-full h-full object-cover object-center opacity-90"
                         fetchpriority="high"
                         onError={(e) => {
                             e.target.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop";
@@ -334,8 +334,26 @@
                 </div>
 
                 {/* --- About / Mission Section --- */}
-                <div id="about" className="py-24 bg-neutral-950">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="about" className="py-24 bg-neutral-950 relative overflow-hidden">
+                    {/* UPDATED: Background Image logic for sticky/parallax effect */}
+                    <div className="absolute inset-0 z-0">
+                        <div className="sticky top-0 h-screen w-full">
+                            {/* UPDATED: Uses background 2.png with lazy loading and object-center */}
+                            <img 
+                                src="background%202.png" 
+                                alt="Gym Interior" 
+                                loading="lazy"
+                                className="w-full h-full object-cover object-center"
+                                onError={(e) => {
+                                    e.target.src = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop";
+                                }}
+                            />
+                            {/* Adding slight darkening to ensure text readability since image is behind content */}
+                            <div className="absolute inset-0 bg-neutral-950/80"></div> 
+                        </div>
+                    </div>
+
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div>
                         <div className="inline-block px-3 py-1 bg-orange-500/10 text-orange-500 rounded-full text-sm font-semibold mb-6">
@@ -374,18 +392,22 @@
                         </div>
                         </div>
                         
-                        <div className="relative">
-                        <div className="absolute -inset-4 bg-orange-500/20 blur-xl rounded-full"></div>
-                        {/* UPDATED: Uses background 2.png with lazy loading */}
-                        <img 
-                            src="background%202.png" 
-                            alt="Gym Interior" 
-                            loading="lazy"
-                            className="relative rounded-lg shadow-2xl border border-neutral-800 transition-all duration-500"
-                            onError={(e) => {
-                                e.target.src = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop";
-                            }}
-                        />
+                        {/* Image decoration removed/simplified since background is the image now */}
+                        <div className="relative hidden md:block"> 
+                            {/* Kept hidden on mobile to rely on the background image for visual, shown on desktop as a focus image? 
+                                Actually, user layout had an image on the right. 
+                                Let's keep the foreground image card for desktop but use the background for vibe.
+                            */}
+                            <div className="absolute -inset-4 bg-orange-500/20 blur-xl rounded-full"></div>
+                            <img 
+                                src="background%202.png" 
+                                alt="Gym Interior Foreground" 
+                                loading="lazy"
+                                className="relative rounded-lg shadow-2xl border border-neutral-800 transition-all duration-500"
+                                onError={(e) => {
+                                    e.target.src = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop";
+                                }}
+                            />
                         </div>
                     </div>
                     </div>
@@ -394,17 +416,20 @@
                 {/* --- Classes Section (SWAPPED: Now using bg3) --- */}
                 <div id="classes" className="py-24 bg-neutral-900 relative overflow-hidden">
                     {/* Background Image 3 (Now under Classes) */}
-                    <div className="absolute inset-0 z-0 pointer-events-none">
-                        {/* UPDATED: Uses background 3.png with lazy loading */}
-                        <img 
-                            src="background%203.png" 
-                            alt="Classes Background" 
-                            loading="lazy"
-                            className="w-full h-full object-cover"
-                            onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                         {/* UPDATED: Overlay Opacity to 88% */}
-                         <div className="absolute inset-0 bg-neutral-900/[0.88]"></div>
+                    <div className="absolute inset-0 z-0">
+                        {/* UPDATED: Sticky background for mobile fix */}
+                        <div className="sticky top-0 h-screen w-full">
+                            {/* UPDATED: Uses background 3.png with lazy loading and object-center */}
+                            <img 
+                                src="background%203.png" 
+                                alt="Classes Background" 
+                                loading="lazy"
+                                className="w-full h-full object-cover object-center"
+                                onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                            {/* UPDATED: Overlay Opacity to 88% */}
+                            <div className="absolute inset-0 bg-neutral-900/[0.88]"></div>
+                        </div>
                     </div>
 
                     {/* Top Gradient Transition */}
@@ -589,21 +614,24 @@
                 {/* --- Membership Section --- */}
                 <div id="membership" className="py-24 bg-neutral-950 relative overflow-hidden">
                     {/* Background Image 4 (Membership) */}
-                    <div className="absolute inset-0 z-0 pointer-events-none">
-                        {/* UPDATED: Uses background 4.png with lazy loading */}
-                        <img 
-                            src="background%204.png" 
-                            alt="Membership Background" 
-                            loading="lazy"
-                            className="w-full h-full object-cover"
-                            onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                         {/* UPDATED: Overlay Opacity to 88% */}
-                         <div className="absolute inset-0 bg-neutral-950/[0.88]"></div>
+                    <div className="absolute inset-0 z-0">
+                        {/* UPDATED: Sticky background for mobile fix */}
+                        <div className="sticky top-0 h-screen w-full">
+                            {/* UPDATED: Uses background 4.png with lazy loading and object-center */}
+                            <img 
+                                src="background%204.png" 
+                                alt="Membership Background" 
+                                loading="lazy"
+                                className="w-full h-full object-cover object-center"
+                                onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                            {/* UPDATED: Overlay Opacity to 88% */}
+                            <div className="absolute inset-0 bg-neutral-950/[0.88]"></div>
+                        </div>
                     </div>
                     
                     {/* UPDATED: Top Gradient Transition (from bg-neutral-900 of previous section) */}
-                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-900 to-transparent z-10 pointer-events-none"></div>
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-950 to-transparent z-10 pointer-events-none"></div>
 
                     {/* UPDATED: Bottom Gradient Transition (to bg-neutral-900 of next section) */}
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-900 to-transparent z-10 pointer-events-none"></div>
@@ -911,16 +939,19 @@
                 <footer id="contact" className="bg-black pt-24 pb-12 border-t border-neutral-900 relative overflow-hidden">
                     {/* Background Image 5 (Contact) */}
                     <div className="absolute inset-0 z-0 pointer-events-none">
-                        {/* UPDATED: Uses background 5.png with lazy loading */}
-                        <img 
-                            src="background%205.png" 
-                            alt="Contact Background" 
-                            loading="lazy"
-                            className="w-full h-full object-cover"
-                            onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                         {/* UPDATED: Overlay Opacity to 88% */}
-                         <div className="absolute inset-0 bg-black/[0.88]"></div>
+                        {/* UPDATED: Sticky background for mobile fix */}
+                        <div className="sticky top-0 h-screen w-full">
+                            {/* UPDATED: Uses background 5.png with lazy loading and object-center */}
+                            <img 
+                                src="background%205.png" 
+                                alt="Contact Background" 
+                                loading="lazy"
+                                className="w-full h-full object-cover object-center"
+                                onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                            {/* UPDATED: Overlay Opacity to 88% */}
+                            <div className="absolute inset-0 bg-black/[0.88]"></div>
+                        </div>
                     </div>
                     
                     {/* UPDATED: Top Gradient Transition (from bg-neutral-900 of previous section) */}
