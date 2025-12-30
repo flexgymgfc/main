@@ -263,11 +263,11 @@
                 <div id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
                     {/* Background Image 1 (Hero) with Overlay */}
                     <div className="absolute inset-0 z-0">
-                    {/* UPDATED: Uses background 1.jpg */}
+                    {/* UPDATED: Uses background 1.jpg with increased opacity */}
                     <img 
                         src="background%201.jpg" 
                         alt="Gym Background" 
-                        className="w-full h-full object-cover opacity-40"
+                        className="w-full h-full object-cover opacity-60"
                         onError={(e) => {
                             e.target.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop";
                         }}
@@ -369,10 +369,10 @@
                         <img 
                             src="background%203.jpg" 
                             alt="Services Background" 
-                            className="w-full h-full object-cover opacity-10"
+                            className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
-                         <div className="absolute inset-0 bg-gradient-to-b from-neutral-900 via-neutral-900/90 to-neutral-900"></div>
+                         <div className="absolute inset-0 bg-neutral-900/80"></div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -452,7 +452,7 @@
                         <img 
                             src="background%204.jpg" 
                             alt="Membership Background" 
-                            className="w-full h-full object-cover opacity-15"
+                            className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
                         <div className="absolute inset-0 bg-neutral-950/80"></div>
@@ -542,23 +542,23 @@
                             <h3 className="text-xl font-bold text-white uppercase tracking-widest mb-6 border-l-4 border-orange-500 pl-4">Short Term Access</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {/* Day Pass */}
-                                <div className="bg-neutral-900/90 rounded-2xl p-6 border border-neutral-800 hover:border-orange-500/50 transition-colors backdrop-blur-sm">
+                                <div className="bg-neutral-900/90 rounded-2xl p-6 border border-neutral-800 hover:border-orange-500/50 transition-colors backdrop-blur-sm flex flex-col">
                                     <h4 className="font-bold text-gray-300 uppercase tracking-wider">Day Pass</h4>
                                     <div className="mt-2 flex items-baseline">
                                         <span className="text-3xl font-black text-white">$7</span>
                                         <span className="ml-1 text-gray-500 text-sm">/visit</span>
                                     </div>
-                                    <p className="mt-2 text-xs text-gray-500">During office hours only.</p>
+                                    <p className="mt-2 text-xs text-gray-500 flex-1">During office hours only.</p>
                                 </div>
 
                                 {/* Week Pass */}
-                                <div className="bg-neutral-900/90 rounded-2xl p-6 border border-neutral-800 hover:border-orange-500/50 transition-colors backdrop-blur-sm">
+                                <div className="bg-neutral-900/90 rounded-2xl p-6 border border-neutral-800 hover:border-orange-500/50 transition-colors backdrop-blur-sm flex flex-col">
                                     <h4 className="font-bold text-gray-300 uppercase tracking-wider">Week Pass</h4>
                                     <div className="mt-2 flex items-baseline">
                                         <span className="text-3xl font-black text-white">$20</span>
                                         <span className="ml-1 text-gray-500 text-sm">/week</span>
                                     </div>
-                                    <p className="mt-2 text-xs text-gray-500">7 consecutive days.</p>
+                                    <p className="mt-2 text-xs text-gray-500 flex-1">7 consecutive days.</p>
                                 </div>
                             </div>
                         </div>
@@ -615,31 +615,20 @@
                                 </ul>
                             </div>
 
-                            {/* Single Standard */}
-                            <div className="bg-white rounded-2xl p-6 border-2 border-orange-500 flex flex-col shadow-2xl shadow-orange-500/10 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 bg-orange-500 text-black text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">
-                                    Standard
-                                </div>
-                                <h3 className="text-xl font-bold text-black uppercase tracking-wider">Single</h3>
+                            {/* Single Standard - STANDARDIZED STYLE */}
+                            <div className="bg-neutral-900/90 rounded-2xl p-6 border border-neutral-800 flex flex-col backdrop-blur-sm relative overflow-hidden">
+                                {/* Removed Highlight ribbon, kept subtle distinction if needed or removed entirely */}
+                                <h3 className="text-xl font-bold text-white uppercase tracking-wider">Single Standard</h3>
                                 <div className="mt-4 flex items-baseline">
-                                    <span className="text-4xl font-black text-black">$42</span>
-                                    <span className="ml-1 text-gray-600 text-sm">/month</span>
+                                    <span className="text-4xl font-black text-white">$42</span>
+                                    <span className="ml-1 text-gray-500 text-sm">/month</span>
                                 </div>
-                                <p className="mt-2 text-sm text-gray-600">Full access membership.</p>
+                                <p className="mt-2 text-sm text-gray-400">Full access membership.</p>
                                 <ul className="mt-6 space-y-3 flex-1">
-                                    <li className="flex items-center text-sm text-gray-800"><Check className="w-4 h-4 text-orange-600 mr-2" /> 24/7 Keycard Access</li>
-                                    <li className="flex items-center text-sm text-gray-800"><Check className="w-4 h-4 text-orange-600 mr-2" /> Tanning Add-on Available (+$20)</li>
-                                    <li className="flex items-center text-sm text-gray-800"><Check className="w-4 h-4 text-orange-600 mr-2" /> Personal Training Available</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> 24/7 Keycard Access</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Tanning Add-on Available (+$20)</li>
+                                    <li className="flex items-center text-sm text-gray-300"><Check className="w-4 h-4 text-orange-500 mr-2" /> Personal Training Available</li>
                                 </ul>
-                                {/* UPDATED: Button now links to external portal */}
-                                <a 
-                                    href="https://flexgymnashville.gymmasteronline.com/portal/login" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="block text-center mt-6 w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded uppercase tracking-wider transition-colors shadow-lg text-sm"
-                                >
-                                    Join Today
-                                </a>
                             </div>
                             
                             {/* Bring a Friend (New) */}
@@ -706,7 +695,16 @@
 
                         </div>
                         
-                        <div className="mt-12 text-center">
+                        <div className="mt-16 text-center">
+                            {/* Main Join Button */}
+                            <a 
+                                href="https://flexgymnashville.gymmasteronline.com/portal/login" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-block px-12 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded text-xl uppercase tracking-wider transition-all transform hover:scale-105 shadow-lg mb-6"
+                            >
+                                Join Today
+                            </a>
                             <p className="text-sm text-gray-500 italic">* Prices subject to change. See front desk for details.</p>
                         </div>
                     </div>
@@ -731,7 +729,8 @@
                             {isRulesOpen ? <ChevronUp className="w-6 h-6 text-orange-500" /> : <ChevronDown className="w-6 h-6 text-gray-400" />}
                         </button>
 
-                        <div className={`mt-4 overflow-hidden transition-all duration-500 ease-in-out ${isRulesOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                        {/* UPDATED: Increased max-height significantly to prevent clipping on mobile */}
+                        <div className={`mt-4 overflow-hidden transition-all duration-500 ease-in-out ${isRulesOpen ? 'max-h-[2500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                             <div className="bg-neutral-950 p-8 rounded-xl border border-neutral-800">
                                 <ol className="space-y-4 text-gray-300 list-decimal list-inside marker:text-orange-500 marker:font-bold">
                                     <li className="pl-2">Headphones or earbuds must be used when streaming audio from any device.</li>
@@ -764,7 +763,7 @@
                         <img 
                             src="background%205.jpg" 
                             alt="Contact Background" 
-                            className="w-full h-full object-cover opacity-10"
+                            className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
                          <div className="absolute inset-0 bg-black/80"></div>
