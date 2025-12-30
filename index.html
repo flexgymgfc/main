@@ -173,12 +173,12 @@
                 }
             };
 
-            // Navigation Links
+            // Navigation Links - Updated Order: Home -> About -> Classes -> Services -> Membership
             const navLinks = [
                 { name: 'Home', href: '#home' },
                 { name: 'About', href: '#about' },
-                { name: 'Services', href: '#services' },
                 { name: 'Classes', href: '#classes' },
+                { name: 'Services', href: '#services' },
                 { name: 'Membership', href: '#membership' },
                 { name: 'Rules', href: '#rules' },
                 { name: 'Contact', href: '#contact' },
@@ -262,14 +262,16 @@
                 </nav>
 
                 {/* --- Hero Section --- */}
-                <div id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+                {/* UPDATED: Changed h-screen to min-h-screen to fix mobile height issues */}
+                <div id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-0">
                     {/* Background Image 1 (Hero) with Overlay */}
                     <div className="absolute inset-0 z-0">
-                    {/* UPDATED: Uses background 1.png with HIGH opacity for visibility */}
+                    {/* UPDATED: Uses background 1.png with fetchpriority="high" for faster loading */}
                     <img 
                         src="background%201.png" 
                         alt="Gym Background" 
                         className="w-full h-full object-cover opacity-90"
+                        fetchpriority="high"
                         onError={(e) => {
                             e.target.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop";
                         }}
@@ -279,18 +281,20 @@
 
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         
-                        {/* UPDATED: Added a backdrop-blur container for text readability against busy background */}
-                        <div className="bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl max-w-5xl mx-auto">
+                        {/* UPDATED: Reduced padding on mobile (p-6) to reduce size */}
+                        <div className="bg-black/50 backdrop-blur-sm p-6 md:p-12 rounded-3xl border border-white/10 shadow-2xl max-w-5xl mx-auto">
                             <h2 className="text-orange-500 font-bold tracking-widest uppercase text-sm md:text-base mb-4 animate-fade-in-up">
                                 Welcome to Flex Gym Graphics & Fitness Center
                             </h2>
-                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 uppercase tracking-tight italic">
+                            {/* UPDATED: Reduced font size on mobile (text-4xl) to fix "way too big" issue */}
+                            <h1 className="text-4xl md:text-7xl lg:text-8xl font-black text-white mb-6 uppercase tracking-tight italic">
                                 Transform <br className="hidden md:block" />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
                                 Your Lifestyle
                                 </span>
                             </h1>
-                            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-200 mb-10 font-medium">
+                            {/* UPDATED: Reduced bottom margin on mobile */}
+                            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-200 mb-6 md:mb-10 font-medium">
                                 We are more than just a gym. We are a company built on family, community, and small town values. Our mission is to help you become a stronger, healthier, more energetic, and confident you.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -355,10 +359,11 @@
                         
                         <div className="relative">
                         <div className="absolute -inset-4 bg-orange-500/20 blur-xl rounded-full"></div>
-                        {/* UPDATED: Uses background 2.png. REMOVED grayscale/hover effects */}
+                        {/* UPDATED: Uses background 2.png with lazy loading */}
                         <img 
                             src="background%202.png" 
                             alt="Gym Interior" 
+                            loading="lazy"
                             className="relative rounded-lg shadow-2xl border border-neutral-800 transition-all duration-500"
                             onError={(e) => {
                                 e.target.src = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop";
@@ -369,13 +374,15 @@
                     </div>
                 </div>
 
-                {/* --- Services Section --- */}
-                <div id="services" className="py-24 bg-neutral-900 relative overflow-hidden">
-                    {/* Background Image 3 (Services) */}
+                {/* --- Classes Section (SWAPPED: Now using bg3) --- */}
+                <div id="classes" className="py-24 bg-neutral-900 relative overflow-hidden">
+                    {/* Background Image 3 (Now under Classes) */}
                     <div className="absolute inset-0 z-0 pointer-events-none">
+                        {/* UPDATED: Uses background 3.png with lazy loading */}
                         <img 
                             src="background%203.png" 
-                            alt="Services Background" 
+                            alt="Classes Background" 
+                            loading="lazy"
                             className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
@@ -383,85 +390,13 @@
                          <div className="absolute inset-0 bg-neutral-900/[0.88]"></div>
                     </div>
 
-                    {/* UPDATED: Top Gradient Transition (from bg-neutral-950 of previous section) */}
+                    {/* Top Gradient Transition */}
                     <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-950 to-transparent z-10 pointer-events-none"></div>
                     
-                    {/* UPDATED: Bottom Gradient Transition (to bg-neutral-900 of next section) */}
+                    {/* Bottom Gradient Transition */}
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-950 to-transparent z-10 pointer-events-none"></div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mb-4">Our Services</h2>
-                        <div className="h-1 w-20 bg-orange-500 mx-auto"></div>
-                        <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
-                        Everything you need under one roof. From heavy lifting to custom branding.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Card 1 */}
-                        <div className="group relative bg-neutral-950/80 backdrop-blur-sm p-8 rounded-xl border border-neutral-800 hover:border-orange-500 transition-colors duration-300">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Dumbbell className="w-24 h-24 text-orange-500" />
-                        </div>
-                        <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-6 text-black">
-                            <Dumbbell className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-4">Fitness Center</h3>
-                        <p className="text-gray-400 mb-6">
-                            Full range of cardio equipment, free weights, squat racks, and resistance machines designed for all fitness levels.
-                        </p>
-                        <ul className="space-y-2 text-sm text-gray-500">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Free Weights</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Cardio Theater</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Certified Personal Training</li>
-                        </ul>
-                        </div>
-
-                        {/* Card 2 */}
-                        <div className="group relative bg-neutral-950/80 backdrop-blur-sm p-8 rounded-xl border border-neutral-800 hover:border-orange-500 transition-colors duration-300">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Printer className="w-24 h-24 text-orange-500" />
-                        </div>
-                        <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-black">
-                            <Printer className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-4">Custom Graphics</h3>
-                        <p className="text-gray-400 mb-6">
-                            We don't just build bodies; we build brands. Custom vinyl, apparel, and design services available on-site.
-                        </p>
-                        <ul className="space-y-2 text-sm text-gray-500">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Custom Apparel</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Decals & Stickers</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Branding Services</li>
-                        </ul>
-                        </div>
-
-                        {/* Card 3 */}
-                        <div className="group relative bg-neutral-950/80 backdrop-blur-sm p-8 rounded-xl border border-neutral-800 hover:border-orange-500 transition-colors duration-300">
-                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                            <Star className="w-24 h-24 text-orange-500" />
-                        </div>
-                        <div className="w-12 h-12 bg-neutral-800 rounded-lg flex items-center justify-center mb-6 text-orange-500">
-                            <Star className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-4">Tanning & More</h3>
-                        <p className="text-gray-400 mb-6">
-                            Complete your look with our tanning services. We provide a clean, safe environment for all your needs.
-                        </p>
-                        <ul className="space-y-2 text-sm text-gray-500">
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Tanning Beds</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Supplements</li>
-                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Merchandise</li>
-                        </ul>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                {/* --- Classes Section --- */}
-                <div id="classes" className="py-24 bg-neutral-950 relative border-t border-neutral-900">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mb-4">Group Classes</h2>
                             <div className="h-1 w-20 bg-orange-500 mx-auto"></div>
@@ -472,7 +407,7 @@
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Hip Hop Step Card */}
-                            <div className="bg-neutral-900 rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
+                            <div className="bg-neutral-900/80 backdrop-blur-sm rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <Music className="w-24 h-24 text-orange-500" />
                                 </div>
@@ -501,7 +436,7 @@
                             </div>
 
                             {/* FVC Card */}
-                            <div className="bg-neutral-900 rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
+                            <div className="bg-neutral-900/80 backdrop-blur-sm rounded-2xl p-8 border border-neutral-800 hover:border-orange-500 transition-colors relative overflow-hidden group">
                                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <Dumbbell className="w-24 h-24 text-orange-500" />
                                 </div>
@@ -532,13 +467,87 @@
                     </div>
                 </div>
 
+                {/* --- Services Section (SWAPPED: Now using dark neutral BG) --- */}
+                <div id="services" className="py-24 bg-neutral-950 relative border-t border-neutral-900">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mb-4">Our Services</h2>
+                        <div className="h-1 w-20 bg-orange-500 mx-auto"></div>
+                        <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+                        Everything you need under one roof. From heavy lifting to custom branding.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Card 1 */}
+                        <div className="group relative bg-neutral-900 p-8 rounded-xl border border-neutral-800 hover:border-orange-500 transition-colors duration-300">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Dumbbell className="w-24 h-24 text-orange-500" />
+                        </div>
+                        <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-6 text-black">
+                            <Dumbbell className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-4">Fitness Center</h3>
+                        <p className="text-gray-400 mb-6">
+                            Full range of cardio equipment, free weights, squat racks, and resistance machines designed for all fitness levels.
+                        </p>
+                        <ul className="space-y-2 text-sm text-gray-500">
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Free Weights</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Cardio Theater</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Certified Personal Training</li>
+                        </ul>
+                        </div>
+
+                        {/* Card 2 */}
+                        <div className="group relative bg-neutral-900 p-8 rounded-xl border border-neutral-800 hover:border-orange-500 transition-colors duration-300">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Printer className="w-24 h-24 text-orange-500" />
+                        </div>
+                        <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-6 text-black">
+                            <Printer className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-4">Custom Graphics</h3>
+                        <p className="text-gray-400 mb-6">
+                            We don't just build bodies; we build brands. Custom vinyl, apparel, and design services available on-site.
+                        </p>
+                        <ul className="space-y-2 text-sm text-gray-500">
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Custom Apparel</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Decals & Stickers</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Branding Services</li>
+                        </ul>
+                        </div>
+
+                        {/* Card 3 */}
+                        <div className="group relative bg-neutral-900 p-8 rounded-xl border border-neutral-800 hover:border-orange-500 transition-colors duration-300">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Star className="w-24 h-24 text-orange-500" />
+                        </div>
+                        <div className="w-12 h-12 bg-neutral-800 rounded-lg flex items-center justify-center mb-6 text-orange-500">
+                            <Star className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-4">Tanning & More</h3>
+                        <p className="text-gray-400 mb-6">
+                            Complete your look with our tanning services. We provide a clean, safe environment for all your needs.
+                        </p>
+                        <ul className="space-y-2 text-sm text-gray-500">
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Tanning Beds</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Supplements</li>
+                            <li className="flex items-center gap-2"><div className="w-1 h-1 bg-orange-500 rounded-full"></div> Merchandise</li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
                 {/* --- Membership Section --- */}
                 <div id="membership" className="py-24 bg-neutral-950 relative overflow-hidden">
                     {/* Background Image 4 (Membership) */}
                     <div className="absolute inset-0 z-0 pointer-events-none">
+                        {/* UPDATED: Uses background 4.png with lazy loading */}
                         <img 
                             src="background%204.png" 
                             alt="Membership Background" 
+                            loading="lazy"
                             className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
@@ -547,7 +556,7 @@
                     </div>
                     
                     {/* UPDATED: Top Gradient Transition (from bg-neutral-900 of previous section) */}
-                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-900 to-transparent z-10 pointer-events-none"></div>
+                    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-neutral-950 to-transparent z-10 pointer-events-none"></div>
 
                     {/* UPDATED: Bottom Gradient Transition (to bg-neutral-900 of next section) */}
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-900 to-transparent z-10 pointer-events-none"></div>
@@ -855,9 +864,11 @@
                 <footer id="contact" className="bg-black pt-24 pb-12 border-t border-neutral-900 relative overflow-hidden">
                     {/* Background Image 5 (Contact) */}
                     <div className="absolute inset-0 z-0 pointer-events-none">
+                        {/* UPDATED: Uses background 5.png with lazy loading */}
                         <img 
                             src="background%205.png" 
                             alt="Contact Background" 
+                            loading="lazy"
                             className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
