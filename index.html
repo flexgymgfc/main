@@ -263,11 +263,11 @@
                 <div id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
                     {/* Background Image 1 (Hero) with Overlay */}
                     <div className="absolute inset-0 z-0">
-                    {/* UPDATED: Uses background 1.jpg with increased opacity */}
+                    {/* UPDATED: Uses background 1.jpg with HIGH opacity for visibility */}
                     <img 
                         src="background%201.jpg" 
                         alt="Gym Background" 
-                        className="w-full h-full object-cover opacity-60"
+                        className="w-full h-full object-cover opacity-90"
                         onError={(e) => {
                             e.target.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop";
                         }}
@@ -286,7 +286,7 @@
                         </span>
                     </h1>
                     <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300 mb-10">
-                        More than just a gym. We are a community dedicated to your health, strength, and creative expression.
+                        We are more than just a gym. We are a company built on family, community, and small town values. Our mission is to help you become a stronger, healthier, more energetic, and confident you.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         {/* UPDATED: Join Now button links to external portal */}
@@ -372,7 +372,8 @@
                             className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
-                         <div className="absolute inset-0 bg-neutral-900/80"></div>
+                         {/* UPDATED: Overlay Opacity to 88% */}
+                         <div className="absolute inset-0 bg-neutral-900/[0.88]"></div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -455,7 +456,8 @@
                             className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
-                        <div className="absolute inset-0 bg-neutral-950/80"></div>
+                         {/* UPDATED: Overlay Opacity to 88% */}
+                         <div className="absolute inset-0 bg-neutral-950/[0.88]"></div>
                     </div>
 
                     {/* Decorative background element */}
@@ -766,7 +768,8 @@
                             className="w-full h-full object-cover"
                             onError={(e) => { e.target.style.display = 'none'; }}
                         />
-                         <div className="absolute inset-0 bg-black/80"></div>
+                         {/* UPDATED: Overlay Opacity to 88% */}
+                         <div className="absolute inset-0 bg-black/[0.88]"></div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
